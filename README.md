@@ -10,11 +10,8 @@ GED
     
 # install
 
-``` json
-    "require": {
-        ...
-        "knplabs/knp-gaufrette-bundle": "~0.3"
-    },
+``` bash
+composer require aamant/ged-bundle
 ```
 
 ## Register the bundle
