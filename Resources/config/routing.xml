@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="aamant_ged_directory_add" path="/directory/{domain}/{node}/add">
+        <default key="_controller">AamantGedBundle:Directory:add</default>
+    </route>
+
+    <route id="aamant_ged_directory_remove" path="/directory/{directory}/{domain}/remove" methods="get">
+        <default key="_controller">AamantGedBundle:Directory:remove</default>
+    </route>
+
+    <!-- Document -->
+    <route id="aamant_ged_document_upload" path="/document/{domain}/{directory}/upload" methods="post">
+        <default key="_controller">AamantGedBundle:Document:upload</default>
+    </route>
+
+    <route id="aamant_ged_document_show" path="/document/{document}/show" methods="get">
+        <default key="_controller">AamantGedBundle:Document:show</default>
+    </route>
+
+    <route id="aamant_ged_document_remove" path="/document/{document}/remove" methods="get">
+        <default key="_controller">AamantGedBundle:Document:remove</default>
+    </route>
+
+    <route id="aamant_ged_directory_show" path="/directory/{domain}/{directory}">
+        <default key="_controller">AamantGedBundle:Default:index</default>
+        <default key="domain">ged</default>
+        <default key="directory">1</default>
+    </route>
+</routes>

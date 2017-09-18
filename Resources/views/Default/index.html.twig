@@ -1,0 +1,84 @@
+<div class="card text-center" data-model="ged">
+    <div class="card-ged" data-uri="{{ path('aamant_ged_directory_show', { 'directory': current.id, 'domain': domain }) }}">
+        <table class="table table-hover">
+            <colgroup>
+                <col span="1" style="width: 85%; text-align: left">
+                <col span="1" style="width: 15%; text-align: right">
+            </colgroup>
+            <tr>
+                <td colspan="2" class="text-left">
+                    {% for node in path %}
+                        {% if loop.last %}
+                            / {{ node.title }}
+                        {% else %}
+                            / <a href="{{ path('aamant_ged_directory_show', { 'directory': node.id, 'domain': domain }) }}" data-type="link">
+                            {{ node.title }}
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% if (current.parent) %}
+                <tr>
+                    <td class="text-left">
+                        <a href="{{ path('aamant_ged_directory_show', { 'directory': current.parent.id, 'domain': domain }) }}" data-type="link">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td></td>
+                </tr>
+            {% endif %}
+            {% for node in tree %}
+                <tr>
+                    <td class="text-left">
+                        <a href="{{ path('aamant_ged_directory_show', { 'directory': node.id, 'domain': domain }) }}" data-type="link">
+                            <i class="fa fa-folder" aria-hidden="true"></i> {{ node.title }}
+                        </a>
+                    </td>
+                    <td class="text-right">
+                        {% if ged_is_granted_write(current) %}
+                        <a href="{{ path('aamant_ged_directory_remove', { 'directory': node.id, 'domain': domain }) }}" data-type="remove-dir"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for document in current.documents %}
+                <tr>
+                    <td class="text-left">
+                        <a href="{{ path('aamant_ged_document_show', { 'document': document.id  }) }}" target="_blank">
+                            <i class="fa fa-file" aria-hidden="true"></i> {{ document.realname }}
+                        </a>
+                    </td>
+                    <td class="text-right">
+                        {% if ged_is_granted_write(current) %}
+                        <a href="{{ path('aamant_ged_document_remove', { 'document': document.id  }) }}" data-type="remove-doc">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% if ged_is_granted_write(current) %}
+        <hr>
+        <div class="card-block">
+            <div class="text-left">
+                {{ form_start(form, {'attr': {'data-type': 'ged-add'} } ) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <hr>
+        <div class="card-block">
+            <div>
+                {{ form_start(upload, {'attr': {'class': 'dropzone', 'id': 'dropzone'} }) }}
+                <div class="fallback">
+                    {{ form_widget(upload) }}
+                </div>
+                <div class="dz-message" data-dz-message><span>{{ 'Drop files here to upload'|trans }}</span></div>
+                {{ form_end(upload) }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

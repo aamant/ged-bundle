@@ -1,0 +1,7 @@
+cloud: ged
+root: ged
+'File Manager': 'Gestionnaire de fichier'
+form.directory: 'Créer un nouveau dossier'
+form.name: nom
+form.submit: Créer
+'Drop files here to upload': 'Déposer ici le fichier à télécharger'
