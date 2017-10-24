@@ -1,2 +1,2 @@
-*.php linguist-language=Php
-*.js linguist-vendored=false
+* linguist-vendored
+Resources/* linguist-vendored=false
