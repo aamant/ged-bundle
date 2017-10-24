@@ -10,6 +10,7 @@ namespace Aamant\GedBundle\Service;
 use Aamant\GedBundle\Entity\Directory;
 use Aamant\GedBundle\Entity\Document;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Validator\Validation;
 
 /**
  * Class Manager
@@ -102,9 +103,6 @@ class Manager
         }
 
         $this->directoryRepository->removeFromTree($directory);
-//        $this->entityManager->clear();
-//        $this->entityManager->flush();
-
         return $this;
     }
 
@@ -121,8 +119,16 @@ class Manager
         return $this;
     }
 
-    public function createRoot()
+    /**
+     * @param $name
+     * @param $title
+     * @return Directory
+     */
+    public function createRoot($name, $title)
     {
+        $ged = $this->directoryRepository->createRoot($name, $title);
+        $this->entityManager->flush();
 
+        return $ged;
     }
 }

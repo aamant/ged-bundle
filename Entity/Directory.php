@@ -24,6 +24,11 @@ class Directory
     private $id;
 
     /**
+     * @ORM\Column(name="name", type="string", length=64, nullable=true)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(length=64)
      */
     private $title;
@@ -88,6 +93,29 @@ class Directory
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set name
+     *
+     * @param mixed $name
+     * @return Directory
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -308,29 +336,5 @@ class Directory
     public function __toString()
     {
         return (string)$this->getId();
-    }
-
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     *
-     * @return Directory
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array
-     */
-    public function getRoles()
-    {
-        return $this->roles;
     }
 }

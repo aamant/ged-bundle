@@ -12,9 +12,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class Auth
 {
-    const ROLE_MASK_READ = 'ROLE_GED_ROOT_%d_READ';
+    const ROLE_MASK_READ = 'ROLE_GED_ROOT_%s_READ';
     const ROLE_ALL_READ = 'ROLE_GED_ROOT_ALL_READ';
-    const ROLE_MASK_WRITE = 'ROLE_GED_ROOT_%d_WRITE';
+    const ROLE_MASK_WRITE = 'ROLE_GED_ROOT_%s_WRITE';
     const ROLE_ALL_WRITE = 'ROLE_GED_ROOT_ALL_WRITE';
 
     /**
@@ -35,6 +35,7 @@ class Auth
 
         $roles = [
             sprintf(self::ROLE_MASK_READ, $directory->getId()),
+            sprintf(self::ROLE_MASK_READ, $directory->getName()),
             self::ROLE_ALL_READ
         ];
 
@@ -49,6 +50,7 @@ class Auth
 
         $roles = [
             sprintf(self::ROLE_MASK_WRITE, $directory->getId()),
+            sprintf(self::ROLE_MASK_WRITE, $directory->getName()),
             self::ROLE_ALL_WRITE
         ];
 

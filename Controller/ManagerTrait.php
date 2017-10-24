@@ -14,7 +14,7 @@ trait ManagerTrait
      */
     public function getManager($domain = null)
     {
-        return $this->get('Aamant_ged.manager');
+        return $this->get('aamant_ged.manager');
     }
 
     /**

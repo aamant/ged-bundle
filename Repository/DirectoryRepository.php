@@ -13,13 +13,15 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
  */
 class DirectoryRepository extends NestedTreeRepository
 {
-    public function createRoot($name = null)
+    public function createRoot($name, $title = null)
     {
-        if (!$name) {
-            $name = 'ged_'.uniqid();
+        if (!$title) {
+            $title = 'ged_'.uniqid();
         }
+
         $root = new Directory();
-        $root->setTitle($name);
+        $root->setName(strtoupper($name));
+        $root->setTitle($title);
 
         $this->persistAsFirstChild($root);
         return $root;

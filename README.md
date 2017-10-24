@@ -10,8 +10,11 @@ GED
     
 # install
 
-``` bash
-composer require aamant/ged-bundle
+``` json
+    "require": {
+        ...
+        "knplabs/knp-gaufrette-bundle": "~0.3"
+    },
 ```
 
 ## Register the bundle
@@ -74,14 +77,63 @@ php app/console assets:install
 ## Create a root directory
 
 ```php
-$gedRepository = $manager->getRepository('AamantGedBundle:Directory');
-$ged = $gedRepository->createRoot('name');
+$manager = $this->container->get('aamant_ged.manager');
+$ged = $manager->createRoot('myName', 'my title');
 
-$manager->flush();
+/**
+ * Associed roles
+ *
+ *   
+ *  ROLE_GED_ROOT_{ID}_READ 
+ */
+
 ```
+
+## Check ROLE
+GED Access
+
+```ROLE_GED_ACCESS```
+
+For specific GED
+
+````
+ROLE_GED_ROOT_{NAME}_READ
+ROLE_GED_ROOT_{NAME}_WRITE
+ROLE_GED_ROOT_{ID}_READ 
+ROLE_GED_ROOT_{ID}_WRITE
+```` 
+
+For all GED
+
+````
+ROLE_GED_ROOT_ALL_READ
+ROLE_GED_ROOT_ALL_WRITE
+````
+
 
 ## Include GED in your template
 
+All authorized GED for current user
+
 ```html
-{{ render(controller('AamantGedBundle:Default:index', {'domain': 'ged', 'directory': ged})) }}
+{% if is_granted(['ROLE_GED_ACCESS']) %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuGed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ 'GED'|trans }}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuGed">
+            {% for ged in ged_all_root() %}
+                <a class="dropdown-item" href="{{ path('ged_index', {'directory': ged.id}) }}">{{ ged.title }}</a>
+            {% endfor %}
+        </div>
+    </li>
+{% endif %}
+```
+
+GED WIDGET
+
+"domain" is a gaufrette filesystem and "directory" is my ged
+
+```html
+{{ render(controller('AamantGedBundle:Default:index', {'domain': 'ged', 'directory': myGed})) }}
 ```
