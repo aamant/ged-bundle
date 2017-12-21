@@ -23,6 +23,17 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('default_sort')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('attribute')->defaultValue('title')->end()
+                        ->scalarNode('order')->defaultValue('asc')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

@@ -25,7 +25,11 @@ class DefaultController extends Controller
 
         /** @var \Aamant\GedBundle\Repository\DirectoryRepository $repository */
         $repository = $this->getDoctrine()->getRepository('AamantGedBundle:Directory');
-        $repository->reorder($directory, 'title', 'asc', false);
+        $repository->reorder($directory,
+            $this->getParameter('aamant_ged.default_sort.attribute'),
+            $this->getParameter('aamant_ged.default_sort.order'),
+            false
+        );
         $this->getDoctrine()->getManager()->flush();
 
         $options = array(

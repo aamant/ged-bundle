@@ -24,5 +24,8 @@ class AamantGedExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $container->setParameter('aamant_ged.default_sort.attribute', $config['default_sort']['attribute']);
+        $container->setParameter('aamant_ged.default_sort.order', $config['default_sort']['order']);
     }
 }
