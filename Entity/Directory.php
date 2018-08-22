@@ -73,7 +73,7 @@ class Directory
 
     /**
      * @ORM\OneToMany(targetEntity="Document", mappedBy="directory")
-     * @ORM\OrderBy({"realname" = "ASC"})
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private $documents;
 
